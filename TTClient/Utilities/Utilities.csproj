@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Logger.cs" />
     <Compile Include="Misc.cs" />
+    <Compile Include="PacketQueue.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Socket.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
