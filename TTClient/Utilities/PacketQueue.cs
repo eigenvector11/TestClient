@@ -41,6 +41,7 @@ namespace Utilities
                 if (Stopped) return;
 
                 _packetQ.Add(packet);
+                Logger.Log("Enqueuing stanza, count = " + _packetQ.Count);
                 Monitor.Pulse(_lockQ);
             }
         }
@@ -57,6 +58,7 @@ namespace Utilities
                     Monitor.Wait(_lockQ);
                 }
 
+                Logger.Log("Dequeuing stanza, count = " + _packetQ.Count);
                 var packet = _packetQ[0];
                 _packetQ.RemoveAt(0);
                 return packet;

@@ -17,8 +17,13 @@ namespace Xmpp
         private Utilities.Socket _socket;
         private NetworkStream _stream;
         private XmlReader _reader;
+        private bool _processStream;
         private Stack<Packet> _xmlBuildStack;
+        private PacketQueue _stanzaQueue;
         private Thread _xmlProcessingThread;
+        private Thread _stanzaProcessingThread;
+
+        
 
         public StreamProperties Properties { get; private set; }
 
@@ -67,18 +72,28 @@ namespace Xmpp
 
         private void StartStreamProcessing()
         {
+            _processStream = true;
+
             _xmlBuildStack = new Stack<Packet>();
-            _xmlProcessingThread = new Thread(ProcessXml) { Name = "Xml processing thread" + DateTime.Now };
+            _stanzaQueue = new PacketQueue();
+
+            _xmlProcessingThread = new Thread(ProcessXml) { Name = "Xml Processing Thread " + DateTime.Now };
             _xmlProcessingThread.Start();
+
+            _stanzaProcessingThread = new Thread(ProcessStanzas) { Name = "Stanza Processing Thread " + DateTime.Now };
+            _stanzaProcessingThread.Start();
+
         }
 
         private void StopStreamProcessing()
         {
+            _processStream = false;
+
             CloseXmlReader();
-
             StopThread(_xmlProcessingThread);
-
             _stream.Close();
+
+            StopThread(_stanzaProcessingThread);
 
         }
 
@@ -256,7 +271,16 @@ namespace Xmpp
                 }
             }
 
-            OnStanzaReceived(packet);
+            _stanzaQueue.Enqueue(packet);
+        }
+
+        private void ProcessStanzas()
+        {
+            while (_processStream)
+            {
+                var packet = _stanzaQueue.Dequeue();
+                OnStanzaReceived(packet);
+            }
         }
 
     }
