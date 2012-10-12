@@ -14,7 +14,7 @@ namespace Xmpp
 
         public void RegisterHandler(string name, Func<Packet, bool> processCondition, Func<Packet, Packet> packetAction)
         {
-
+            Logger.Log("Registering handler " + name);
             OnPacketReceived += packet =>
             {
                 var toProcess = false;
@@ -24,7 +24,7 @@ namespace Xmpp
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log("Exception while evaluating process-condition " + name + " for packet " + packet);
+                    Logger.Log("Exception while evaluating stanza handling condition " + name + " for packet " + packet);
                     Logger.Log(ex);
                 }
 

@@ -12,14 +12,17 @@ namespace Xmpp
         public Session(Account account)
         {
             _account = account;
+            _stream = new Stream();
+            _stanzaManager = new StanzaManager();
+            
+            _stream.OnStanzaReceived += _stanzaManager.HandleStanza;
+
+            RegisterHandlers();
+
         }
 
         public void Start()
         {
-            _stream = new Stream();
-            _stanzaManager = new StanzaManager();
-            _stream.OnStanzaReceived += _stanzaManager.HandleStanza;
-
 
             Logger.Log("Sending stream open");
 
@@ -29,13 +32,20 @@ namespace Xmpp
             };
 
             _stream.Open(_streamProperties);
-
             _stream.Send(_streamProperties.OpeningTag());
+
         }
 
-        public void Close()
+        public void End()
         {
             _stream.Close();
+            _stream = null;
+            _stanzaManager = null;
+        }
+
+        private void RegisterHandlers()
+        {
+            
         }
 
     }
