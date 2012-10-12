@@ -4,18 +4,19 @@ namespace Xmpp
 {
     public class Session
     {
-        private Stream _stream;
-        private Account _account;
-        private StanzaManager _stanzaManager;
+        public Stream Stream { get; private set; }
+        public Account Account { get; private set; }
+        public StanzaManager StanzaManager { get; private set; }
+
         private StreamProperties _streamProperties;
 
         public Session(Account account)
         {
-            _account = account;
-            _stream = new Stream();
-            _stanzaManager = new StanzaManager();
+            Account = account;
+            Stream = new Stream();
+            StanzaManager = new StanzaManager();
             
-            _stream.OnStanzaReceived += _stanzaManager.HandleStanza;
+            Stream.OnStanzaReceived += StanzaManager.HandleStanza;
 
             RegisterHandlers();
 
@@ -28,19 +29,19 @@ namespace Xmpp
 
             _streamProperties = new StreamProperties
             {
-                Account = _account
+                Account = Account
             };
 
-            _stream.Open(_streamProperties);
-            _stream.Send(_streamProperties.OpeningTag());
+            Stream.Open(_streamProperties);
+            Stream.Send(_streamProperties.OpeningTag());
 
         }
 
         public void End()
         {
-            _stream.Close();
-            _stream = null;
-            _stanzaManager = null;
+            Stream.Close();
+            Stream = null;
+            StanzaManager = null;
         }
 
         private void RegisterHandlers()

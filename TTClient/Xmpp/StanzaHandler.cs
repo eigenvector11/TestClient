@@ -4,21 +4,21 @@ namespace Xmpp
 {
     abstract public class StanzaHandler
     {
-        private StanzaManager _stanzaManager;
+        protected Session Session { get; set; }
 
-        abstract public string Name { get; protected set; }
+        abstract public string Name { get; }
         abstract public bool HandlingCondition(Packet packet);
         abstract public Packet Handler(Packet packet);
 
-        protected StanzaHandler(StanzaManager stanzaManager)
+        protected StanzaHandler(Session session)
         {
-            _stanzaManager = stanzaManager;
+            Session = session;
             Register();
         }
 
         private void Register()
         {
-            _stanzaManager.RegisterHandler(Name, HandlingCondition, Handler);
+            Session.StanzaManager.RegisterHandler(Name, HandlingCondition, Handler);
         }
 
 

@@ -14,7 +14,7 @@ namespace Xmpp
 
         public void RegisterHandler(string name, Func<Packet, bool> processCondition, Func<Packet, Packet> packetAction)
         {
-            Logger.Log("Registering handler " + name);
+            Logger.Log("Registering handler - " + name);
             OnPacketReceived += packet =>
             {
                 var toProcess = false;
