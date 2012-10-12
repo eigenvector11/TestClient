@@ -1,0 +1,6 @@
+<Modules>
+  <Module PersistentId="3ECCA410-A330-45C3-8456-F87244187F10" ModuleId="Xmpp" />
+  <Module PersistentId="1E23EC62-A33E-437E-9622-565F3CBD4CFC" ModuleId="Tester" />
+  <Module PersistentId="45954CBF-24F2-4780-B8E8-7CD85D9659B4" ModuleId="Utilities" />
+  <Module PersistentId="38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0" ModuleId="crypto" />
+</Modules>
