@@ -8,7 +8,7 @@ namespace Xmpp
 
         abstract public string Name { get; }
         abstract public bool HandlingCondition(Packet packet);
-        abstract public Packet Handler(Packet packet);
+        abstract public Packet Handle(Packet packet);
 
         protected StanzaHandler(Session session)
         {
@@ -18,7 +18,7 @@ namespace Xmpp
 
         private void Register()
         {
-            Session.StanzaManager.RegisterHandler(Name, HandlingCondition, Handler);
+            Session.StanzaManager.RegisterHandler(this);
         }
 
 

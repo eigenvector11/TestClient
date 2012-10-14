@@ -42,6 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="AuthenticationPlain.cs" />
+    <Compile Include="AuthenticationPlainPw.cs" />
+    <Compile Include="FeatureNegotiationHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StanzaHandler.cs" />
     <Compile Include="Stream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,10 +55,6 @@
     <Compile Include="StanzaManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\crypto\crypto.csproj">
-      <Project>{38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0}</Project>
-      <Name>crypto</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{45954CBF-24F2-4780-B8E8-7CD85D9659B4}</Project>
       <Name>Utilities</Name>

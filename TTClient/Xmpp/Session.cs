@@ -7,6 +7,7 @@ namespace Xmpp
         public Stream Stream { get; private set; }
         public Account Account { get; private set; }
         public StanzaManager StanzaManager { get; private set; }
+        public string MetaToken { get; set; }
 
         private StreamProperties _streamProperties;
 
@@ -46,7 +47,7 @@ namespace Xmpp
 
         private void RegisterHandlers()
         {
-            
+            new FeatureNegotiationHandler(this);
         }
 
     }

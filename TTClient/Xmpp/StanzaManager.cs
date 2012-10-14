@@ -12,19 +12,19 @@ namespace Xmpp
             OnPacketReceived = packet => packet;
         }
 
-        public void RegisterHandler(string name, Func<Packet, bool> processCondition, Func<Packet, Packet> packetAction)
+        public void RegisterHandler(StanzaHandler stanzaHandler)
         {
-            Logger.Log("Registering handler - " + name);
+            Logger.Log("Registering handler - " + stanzaHandler.Name);
             OnPacketReceived += packet =>
             {
                 var toProcess = false;
                 try
                 {
-                    toProcess = processCondition(packet);
+                    toProcess = stanzaHandler.HandlingCondition(packet);
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log("Exception while evaluating stanza handling condition " + name + " for packet " + packet);
+                    Logger.Log("Exception while evaluating stanza handling condition " + stanzaHandler.Name + " for packet " + packet);
                     Logger.Log(ex);
                 }
 
@@ -32,11 +32,11 @@ namespace Xmpp
                 {
                     try
                     {
-                        packetAction(packet);
+                        stanzaHandler.Handle(packet);
                     }
                     catch (Exception ex1)
                     {
-                        Logger.Log("Exception while processing packet handler " + name + " for packet " + packet);
+                        Logger.Log("Exception while processing packet handler " + stanzaHandler.Name + " for packet " + packet);
                         Logger.Log(ex1);
                     }
                 }
