@@ -44,6 +44,13 @@ namespace Xmpp
             _stream = _socket.Connect();
 
             StartStreamProcessing();
+
+            Send(Properties.StartStream());
+        }
+
+        public void Restart()
+        {
+            Send(Properties.RestartStream());
         }
 
         public void Close()
@@ -245,7 +252,7 @@ namespace Xmpp
         {
             if (packet == null) return;
 
-            Logger.Log("Handling packet ...");
+            // Logger.Log("Handling packet ...");
 
             if (packet.Name.Equals("empty"))
             {
@@ -261,13 +268,13 @@ namespace Xmpp
 
             if (!packet.HasAttribute("to"))
             {
-                Logger.Log("Packet does not have To attribute");
+                // Logger.Log("Packet does not have To attribute");
             }
             else
             {
                 if (!packet.GetAttribute("to").ToLower().Trim().StartsWith(Properties.Account.Jid.ToLower().Trim()))
                 {
-                    Logger.Log("Packet To attribute does not start with Jid " + Properties.Account.Jid);
+                    // Logger.Log("Packet To attribute does not start with Jid " + Properties.Account.Jid);
                 }
             }
 

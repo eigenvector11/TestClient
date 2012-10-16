@@ -57,7 +57,7 @@ namespace Utilities
         {
             if (xmlns != null)
             {
-                var _namespace = xmlns;
+                XNamespace _namespace = xmlns;
                 _element = new XElement(_namespace + name, new XAttribute("xmlns", xmlns));
             }
             else

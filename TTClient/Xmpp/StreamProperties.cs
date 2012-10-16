@@ -24,24 +24,29 @@ namespace Xmpp
         [DataMember]
         public string Route { get; set; }
 
-        public string OpeningTag()
+        public string StartStream()
+        {
+            return "<?xml version='1.0'?>" + RestartStream();
+        }
+
+        public string RestartStream()
         {
             if (string.IsNullOrEmpty(To))
                 To = Account.Domain;
 
-            var openingTag = new StringBuilder();
+            var conn = new StringBuilder();
 
-            openingTag.Append("<?xml version='1.0'?>");
-            openingTag.Append("<stream:stream ");
-            openingTag.Append("to='" + To + "'  ");
-            openingTag.Append("version='1.0' ");
-            openingTag.Append("xml:lang='en' ");
-            openingTag.Append("xmlns='jabber:client' ");
-            openingTag.Append("xmlns:stream='http://etherx.jabber.org/streams' ");
-            openingTag.Append(">");
+            conn.Append("<stream:stream ");
+            conn.Append("to='" + To + "'  ");
+            conn.Append("version='1.0' ");
+            conn.Append("xml:lang='en' ");
+            conn.Append("xmlns='jabber:client' ");
+            conn.Append("xmlns:stream='http://etherx.jabber.org/streams' ");
+            conn.Append(">");
 
-            return openingTag.ToString();
+            return conn.ToString();
         }
+
 
     }
 }

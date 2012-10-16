@@ -26,21 +26,11 @@ namespace Xmpp
             var child = packet.GetChild("mechanisms");
             var mechanisms = child.GetChildren("mechanism");
 
-            if (string.IsNullOrEmpty(Session.MetaToken))
+            foreach (var mechanism in mechanisms.Where(mechanism => mechanism.Value == "PLAIN-PW-TOKEN"))
             {
-                foreach (var mechanism in mechanisms.Where(mechanism => mechanism.Value == "PLAIN"))
-                {
-                    new AuthenticationPlain(Session, packet);
-                    return packet;
-                }
-            }
-            else
-            {
-                foreach (var mechanism in mechanisms.Where(mechanism => mechanism.Value == "PLAIN-PW-TOKEN"))
-                {
-                    new AuthenticationPlainPw(Session, packet);
-                    return packet;
-                }
+                var pwAuth = new AuthenticationPlainPw(Session);
+                pwAuth.Authenticate();
+                return packet;
             }
             return packet;
         }

@@ -9,7 +9,7 @@ namespace Tester
         {
             var session = new Session(new Account
                                           {
-                                              Jid = "vineet.g.test @directi.com",
+                                              Jid = "chaitanya.g.test@directi.com",
                                               Password = "qwedsa",
                                               Port = 5222,
                                               Server = "talkto.directi.com",

@@ -47,7 +47,7 @@ namespace Xmpp
 
         public Packet HandleStanza(Packet packet)
         {
-            Logger.Log("Handling packet at Xmpp ...");
+            // Logger.Log("Handling packet at Xmpp ...");
             OnPacketReceived(packet);
             return packet;
         }

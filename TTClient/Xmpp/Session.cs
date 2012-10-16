@@ -34,8 +34,6 @@ namespace Xmpp
             };
 
             Stream.Open(_streamProperties);
-            Stream.Send(_streamProperties.OpeningTag());
-
         }
 
         public void End()
