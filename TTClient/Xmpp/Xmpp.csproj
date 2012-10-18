@@ -44,6 +44,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="AuthenticationPlainPw.cs" />
     <Compile Include="AuthToken.cs" />
+    <Compile Include="Disco.cs" />
     <Compile Include="FeatureNegotiationHandler.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -63,6 +64,9 @@
       <Project>{45954CBF-24F2-4780-B8E8-7CD85D9659B4}</Project>
       <Name>Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Roster\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

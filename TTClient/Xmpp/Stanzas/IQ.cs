@@ -93,7 +93,6 @@ namespace Xmpp.Stanzas
             return this;
         }
 
-
         private static IQType GetIqType(string type)
         {
             var map = GetDescriptionMap();

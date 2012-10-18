@@ -1,12 +1,18 @@
-﻿using Utilities;
+﻿using System;
+using Utilities;
 using Xmpp.Stanzas;
 
 namespace Xmpp
 {
     public class ResourceBinder : IqHandler
     {
-        public ResourceBinder(Session session) : base(session)
-        {}
+        public event Func<Packet, Packet> OnBinding;
+
+        public ResourceBinder(Session session)
+            : base(session)
+        {
+            OnBinding = packet => packet;
+        }
 
 
         public override string Name
@@ -20,6 +26,7 @@ namespace Xmpp
             {
                 var jid = packet.GetChild("bind").GetChild("jid").Value;
                 Logger.Log("Full jid = " + jid);
+                OnBinding(packet);
             }
             return packet;
         }

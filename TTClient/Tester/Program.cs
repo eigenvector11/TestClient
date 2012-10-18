@@ -17,6 +17,7 @@ namespace Tester
                                               Resource = "myresource"
                                           });
             session.Start();
+
             Console.ReadLine();
         }
     }

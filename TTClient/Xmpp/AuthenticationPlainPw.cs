@@ -9,9 +9,12 @@ namespace Xmpp
     {
         private Account _account;
 
+        public event Func<Packet, Packet> OnAuthentication;
+
         public AuthenticationPlainPw(Session session) : base(session)
         {
             _account = Stream.Properties.Account;
+            OnAuthentication = packet => packet;
         }
 
         override public string Name
@@ -39,7 +42,7 @@ namespace Xmpp
                 var expiry = Int32.Parse(token.GetAttribute("expires_in_minutes"));
                 var value = token.Value;
                 Session.Token = new AuthToken(value, expiry);
-                Stream.Restart();
+                OnAuthentication(packet);
             }
             return packet;
         }
@@ -49,7 +52,6 @@ namespace Xmpp
             Register();
             var auth = GetAuthPacket();
             Stream.Send(auth);
-            
         }
 
         private Packet GetAuthPacket()

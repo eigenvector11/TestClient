@@ -10,11 +10,6 @@ namespace Xmpp
         protected IqHandler(Session session) : base(session)
         {}
 
-        public override string Name
-        {
-            get { return "IQ handler"; }
-        }
-
         public override bool HandlingCondition(Packet packet)
         {
             return packet.Name == "iq" && packet.GetAttribute("id") == _iq.Id;

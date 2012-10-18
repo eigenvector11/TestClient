@@ -1,4 +1,5 @@
-﻿using Utilities;
+﻿using System;
+using Utilities;
 
 namespace Xmpp
 {
