@@ -45,7 +45,7 @@ namespace Xmpp
             return packet;
         }
 
-        public void Negotiate()
+        public void RegisterForNegotiation()
         {
             Register();
         }

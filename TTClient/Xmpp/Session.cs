@@ -15,12 +15,12 @@ namespace Xmpp
         {
             Account = account;
             Stream = new Stream();
+
             StanzaManager = new StanzaManager();
-            
             Stream.OnStanzaReceived += StanzaManager.HandleStanza;
 
-            RegisterHandlers();
-
+            var featureNegotiation = new FeatureNegotiationHandler(this);
+            featureNegotiation.RegisterForNegotiation();
         }
 
         public void Start()
@@ -41,12 +41,6 @@ namespace Xmpp
             Stream.Close();
             Stream = null;
             StanzaManager = null;
-        }
-
-        private void RegisterHandlers()
-        {
-            var featureNegotiation = new FeatureNegotiationHandler(this);
-            featureNegotiation.Negotiate();
         }
 
     }
