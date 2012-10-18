@@ -5,6 +5,7 @@ namespace Xmpp
     abstract public class StanzaHandler
     {
         protected Session Session { get; set; }
+        protected Stream Stream { get; set; }
 
         abstract public string Name { get; }
         abstract public bool HandlingCondition(Packet packet);
@@ -13,10 +14,10 @@ namespace Xmpp
         protected StanzaHandler(Session session)
         {
             Session = session;
-            Register();
+            Stream = session.Stream;
         }
 
-        private void Register()
+        protected void Register()
         {
             Session.StanzaManager.RegisterHandler(this);
         }

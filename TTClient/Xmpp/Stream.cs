@@ -68,7 +68,7 @@ namespace Xmpp
 
             if (!_stream.CanWrite) return;
 
-            Logger.Log("SEND: " + str);
+            Logger.Log("SEND:\n" + str);
 
             var bytes = Encoding.UTF8.GetBytes(str);
             _stream.Write(bytes, 0, bytes.Length);
@@ -244,7 +244,7 @@ namespace Xmpp
             {
                 if (packet != null)
                 {
-                    Logger.Log("RECD: " + packet);
+                    Logger.Log("RECD:\n" + packet);
                     HandlePacket(packet);
                 }
             }

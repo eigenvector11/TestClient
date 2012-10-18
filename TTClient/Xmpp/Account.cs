@@ -20,6 +20,9 @@ namespace Xmpp
         [DataMember]
         public string Domain { get; set; }
 
+        [DataMember]
+        public string Resource { get; set; }
+
 
         public Account()
         {

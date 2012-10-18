@@ -13,7 +13,8 @@ namespace Tester
                                               Password = "qwedsa",
                                               Port = 5222,
                                               Server = "talkto.directi.com",
-                                              Domain = "directi.com"
+                                              Domain = "directi.com",
+                                              Resource = "myresource"
                                           });
             session.Start();
             Console.ReadLine();

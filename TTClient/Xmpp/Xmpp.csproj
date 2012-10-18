@@ -43,9 +43,12 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="AuthenticationPlainPw.cs" />
+    <Compile Include="AuthToken.cs" />
     <Compile Include="FeatureNegotiationHandler.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IqHandler.cs" />
+    <Compile Include="ResourceBinder.cs" />
     <Compile Include="StanzaHandler.cs" />
     <Compile Include="Stanzas\IQ.cs" />
     <Compile Include="Stanzas\Stanza.cs" />

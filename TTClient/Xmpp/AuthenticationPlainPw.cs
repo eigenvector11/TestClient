@@ -7,13 +7,11 @@ namespace Xmpp
 {
     public class AuthenticationPlainPw : StanzaHandler
     {
-        private Stream _stream;
         private Account _account;
 
         public AuthenticationPlainPw(Session session) : base(session)
         {
-            _stream = session.Stream;
-            _account = _stream.Properties.Account;
+            _account = Stream.Properties.Account;
         }
 
         override public string Name
@@ -37,16 +35,20 @@ namespace Xmpp
             }
             if (packet.Name == "success")
             {
-                // Logger.Log("Auth SUCCESS - " + packet);
-                _stream.Restart();
+                var token = packet.GetChild("pw-token");
+                var expiry = Int32.Parse(token.GetAttribute("expires_in_minutes"));
+                var value = token.Value;
+                Session.Token = new AuthToken(value, expiry);
+                Stream.Restart();
             }
             return packet;
         }
 
         public void Authenticate()
         {
+            Register();
             var auth = GetAuthPacket();
-            _stream.Send(auth);
+            Stream.Send(auth);
             
         }
 

@@ -18,21 +18,36 @@ namespace Xmpp
         
         public override bool HandlingCondition(Packet packet)
         {
-            return packet.Name == "features" && packet.HasChild("mechanisms");
+            return (packet.Name == "features" && packet.HasChild("mechanisms")) ||
+                   (packet.Name == "features" && packet.HasChild("bind"));
         }
 
         public override Packet Handle(Packet packet)
         {
-            var child = packet.GetChild("mechanisms");
-            var mechanisms = child.GetChildren("mechanism");
-
-            foreach (var mechanism in mechanisms.Where(mechanism => mechanism.Value == "PLAIN-PW-TOKEN"))
+            if (packet.HasChild("mechanisms"))
             {
-                var pwAuth = new AuthenticationPlainPw(Session);
-                pwAuth.Authenticate();
-                return packet;
+                var mechanisms = packet.GetChild("mechanisms").GetChildren("mechanism");
+
+                if (mechanisms.Any(mechanism => mechanism.Value == "PLAIN-PW-TOKEN"))
+                {
+                    var pwAuth = new AuthenticationPlainPw(Session);
+                    pwAuth.Authenticate();
+                    return packet;
+                }
             }
+
+            if (packet.HasChild("bind"))
+            {
+                var binder = new ResourceBinder(Session);
+                binder.Bind(Session.Account.Resource);
+            }
+
             return packet;
+        }
+
+        public void Negotiate()
+        {
+            Register();
         }
 
     }

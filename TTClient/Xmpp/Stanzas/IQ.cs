@@ -28,27 +28,27 @@ namespace Xmpp.Stanzas
         public IQ() 
             : base(_NAME)
         {
-            SetAttribute("id", GetNextId() + "");
+            SetAttribute("id", GetNextId());
         }
 
         public IQ(IQType type)
             : base(_NAME)
         {
-            SetAttribute("id", GetNextId() + "");
+            SetAttribute("id", GetNextId());
             Type = (GetIqType(type));
         }
 
         public IQ(IQType type, string xmlns) 
             : base(_NAME, xmlns)
         {
-            SetAttribute("id", GetNextId() + "");
+            SetAttribute("id", GetNextId());
             Type = (GetIqType(type));
         }
 
         public IQ(IQType type, String from, String to) 
             : base(_NAME)
         {
-            SetAttribute("id", GetNextId() + "");
+            SetAttribute("id", GetNextId());
             Type = (GetIqType(type));
             From = from;
             To = to;
@@ -58,7 +58,7 @@ namespace Xmpp.Stanzas
 
         public static string GetNextId()
         {
-            var id = ++_id;
+            var id = _id++;
             return id.ToString(CultureInfo.InvariantCulture);
         }
 
@@ -77,12 +77,12 @@ namespace Xmpp.Stanzas
             return iq.HasAttribute(_TYPE, "result");
         }
 
-        public void AddSession(String xmlns)
+        public void AddSession(string xmlns)
         {
             AddChild("session", xmlns);
         }
 
-        public void AddQuery(String xmlns)
+        public void AddQuery(string xmlns)
         {
             AddChild("query", xmlns);
         }

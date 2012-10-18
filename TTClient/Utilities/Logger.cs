@@ -29,7 +29,7 @@ namespace Utilities
         {
 //            if (Debugger.IsAttached) Debug.WriteLine(s);
 
-            Console.WriteLine(s);
+            Console.WriteLine(s + "\n");
             
         }
 
