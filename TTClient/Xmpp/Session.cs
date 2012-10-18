@@ -19,10 +19,7 @@ namespace Xmpp
             StanzaManager = new StanzaManager();
             Stream.OnStanzaReceived += StanzaManager.HandleStanza;
 
-            var featureNegotiation = new FeatureNegotiationHandler(this);
-            featureNegotiation.OnAuthenticated += OnAuthentication;
-            featureNegotiation.OnResourceBinding += OnResourceBinding;
-            featureNegotiation.RegisterForNegotiation();
+            SetupNegotiation();
         }
 
         public void Start()
@@ -46,19 +43,25 @@ namespace Xmpp
             StanzaManager = null;
         }
 
-        private Packet OnAuthentication(Packet packet)
+        private void SetupNegotiation()
         {
-            Stream.Restart();
-            return packet;
-        }
+            var featureNegotiation = new FeatureNegotiationHandler(this);
 
-        private Packet OnResourceBinding(Packet packet)
-        {
-            var disco = new Disco(this);
-            disco.Discover();
-            return packet;
-        }
+            featureNegotiation.OnAuthenticated += packet =>
+            {
+                Stream.Restart();
+                return packet;
+            };
 
+            featureNegotiation.OnResourceBinding += packet =>
+            {
+                var disco = new Disco(this);
+                disco.Discover();
+                return packet;
+            };
+
+            featureNegotiation.RegisterForNegotiation();
+        }
 
 
     }
