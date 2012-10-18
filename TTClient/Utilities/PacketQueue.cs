@@ -6,8 +6,8 @@ namespace Utilities
 {
     public class PacketQueue
     {
-        private List<Packet> _packetQ;
-        private object _lockQ;
+        private readonly List<Packet> _packetQ;
+        private readonly object _lockQ;
 
         public bool Stopped { get; private set; }
 

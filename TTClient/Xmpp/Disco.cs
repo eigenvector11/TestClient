@@ -1,5 +1,4 @@
-﻿using System;
-using Utilities;
+﻿using Utilities;
 using Xmpp.Stanzas;
 
 namespace Xmpp

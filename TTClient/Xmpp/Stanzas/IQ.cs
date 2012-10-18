@@ -17,7 +17,7 @@ namespace Xmpp.Stanzas
 
     public class IQ : Stanza
     {
-        private static readonly string _NAME = "iq";
+        private const string _NAME = "iq";
 
         private static int _id = new Random().Next(100000, 1000000);
 

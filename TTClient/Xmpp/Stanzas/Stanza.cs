@@ -6,13 +6,14 @@ namespace Xmpp.Stanzas
     [DataContract]
     public class Stanza : Packet
     {
-        protected static readonly string _TYPE = "type";
-        protected static readonly string _FROM = "from";
-        protected static readonly string _ID = "id";
-        protected static readonly string _TO = "to";
+        protected const string _TYPE = "type";
+        protected const string _FROM = "from";
+        protected const string _ID = "id";
+        protected const string _TO = "to";
+        protected const string _XMLNS = "jabber:client";
 
         
-        public Stanza(string name) : base(name, "jabber:client")
+        public Stanza(string name) : base(name, _XMLNS)
         {}
 
         public Stanza(string name, string xmlns) : base(name, xmlns)

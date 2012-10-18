@@ -7,7 +7,7 @@ namespace Xmpp
 {
     public class AuthenticationPlainPw : StanzaHandler
     {
-        private Account _account;
+        private readonly Account _account;
 
         public event Func<Packet, Packet> OnAuthentication;
 
