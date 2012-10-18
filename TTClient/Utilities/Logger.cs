@@ -29,7 +29,7 @@ namespace Utilities
         {
 //            if (Debugger.IsAttached) Debug.WriteLine(s);
 
-            Console.WriteLine(s + "\n");
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss.fff") + " - " + s + "\n");
             
         }
 

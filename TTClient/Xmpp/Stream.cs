@@ -68,7 +68,7 @@ namespace Xmpp
 
             if (!_stream.CanWrite) return;
 
-            Logger.Log("SEND:\n" + str);
+            Logger.Log("SENT:\n" + str);
 
             var bytes = Encoding.UTF8.GetBytes(str);
             _stream.Write(bytes, 0, bytes.Length);
