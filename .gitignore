@@ -2,5 +2,13 @@
 bin
 obj
 
+# misc artifacts we do not want to version control
+misc-artifacts
+misc-artifacts/*
+
+# resharper generated project
+TTClient/_ReSharper.TTClient
+TTClient/_ReSharper.TTClient/*
+
 # mstest test results
 TestResults
