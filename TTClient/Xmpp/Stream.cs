@@ -55,6 +55,8 @@ namespace Xmpp
 
         public void Close()
         {
+            Send(Properties.CloseStream());
+
             StopStreamProcessing();
 
             _socket.Disconnect();

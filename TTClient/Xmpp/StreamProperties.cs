@@ -47,6 +47,11 @@ namespace Xmpp
             return conn.ToString();
         }
 
+        public string CloseStream()
+        {
+            return "</stream:stream>";
+        }
+
 
     }
 }
