@@ -45,7 +45,6 @@ namespace Xmpp.Stanzas
 
         private static readonly Dictionary<PresenceType, string> PresenceTypeMap;
         private static readonly Dictionary<Show, string> ShowMap;
-        private static readonly Dictionary<string, Show> StringShowMap;
 
         #region Constructors
         static Presence()
@@ -73,16 +72,6 @@ namespace Xmpp.Stanzas
                                 {Show.Unknown, "unknown"}
                             };
 
-            StringShowMap = new Dictionary<string, Show>
-                                {
-                                    {"default", Show.Chat},
-                                    {"chat", Show.Chat},
-                                    {"available", Show.Chat},
-                                    {"dnd", Show.Dnd},
-                                    {"xa", Show.Away},
-                                    {"away", Show.Away},
-                                    {"invisible", Show.Invisible}
-                                };
         }
 
         public Presence(string name)
@@ -168,14 +157,14 @@ namespace Xmpp.Stanzas
             }
         }
 
-        private static Show GetShow(string show)
-        {
-            return StringShowMap[show];
-        }
-
         private static string GetShow(Show show)
         {
             return ShowMap[show];
+        }
+
+        private static Show GetShow(string show)
+        {
+            return ShowMap.Keys.FirstOrDefault(key => ShowMap[key] == show);
         }
 
         private static string GetPresenceType(PresenceType presenceType)
