@@ -50,6 +50,8 @@
     </Compile>
     <Compile Include="IqHandler.cs" />
     <Compile Include="ResourceBinder.cs" />
+    <Compile Include="Roster\RosterItem.cs" />
+    <Compile Include="ServiceType.cs" />
     <Compile Include="StanzaHandler.cs" />
     <Compile Include="Stanzas\IQ.cs" />
     <Compile Include="Stanzas\Presence.cs" />
@@ -66,9 +68,7 @@
       <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Roster\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
