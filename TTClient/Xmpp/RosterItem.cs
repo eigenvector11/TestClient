@@ -1,6 +1,6 @@
 ﻿using Xmpp.Stanzas;
 
-namespace Xmpp.Roster
+namespace Xmpp
 {
     public class RosterItem
     {
