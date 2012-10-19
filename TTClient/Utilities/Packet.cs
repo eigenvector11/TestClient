@@ -147,11 +147,11 @@ namespace Utilities
 
         public bool RemoveChild(Packet child)
         {
-            var element = _element.Elements().Where(e => e.Name.LocalName == child.Name);
+            var elements = _element.Elements().Where(e => e.Name.LocalName == child.Name);
 
-            if (element.Any())
+            if (elements.Any())
             {
-                element.Remove();
+                elements.Remove();
                 return true;
             }
             return false;

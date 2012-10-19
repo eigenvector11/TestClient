@@ -52,6 +52,7 @@
     <Compile Include="ResourceBinder.cs" />
     <Compile Include="StanzaHandler.cs" />
     <Compile Include="Stanzas\IQ.cs" />
+    <Compile Include="Stanzas\Presence.cs" />
     <Compile Include="Stanzas\Stanza.cs" />
     <Compile Include="Stream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
